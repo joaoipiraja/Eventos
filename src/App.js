@@ -1,9 +1,9 @@
-
+import Login from './view/login'
 
 function App() {
   return (
     <div className="App">
-      <h1>Olá!</h1>
+      <Login />
     </div>
   );
 }
