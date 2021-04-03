@@ -9,11 +9,12 @@ function Login() {
 
     const [email, setEmail] = useState();
     const [senha, setSenha] = useState();
+    const [msgTipo,setMsgTipo] = useState();
 
     function logar() {
 
         firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
-            alert("Usuário logado!");
+            setMsgTipo("sucesso");
             setEmail("");
             setSenha("");
         }).catch(error => {
@@ -40,11 +41,11 @@ function Login() {
                 <h1 class="h3 mb-3 fw-normal text-white font-weight-bold">Login</h1>
 
                 <div class="form-floating mt-2 col-md-12">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" onChange={handleEmailChange} />
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" onChange={handleEmailChange} value={email}/>
                     <label for="floatingInput">Email</label>
                 </div>
                 <div class="form-floating mt-2 col-md-12">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Senha" onChange={handlePasswordChange} />
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Senha" onChange={handlePasswordChange} value={senha}/>
                     <label for="floatingPassword">Senha</label>
                 </div>
 
@@ -54,8 +55,8 @@ function Login() {
             </form >
 
             <div className="msg-login text-white text-center my-2">
-                <span><strong>Wow!</strong> você está conectado! &#128526;</span>
-                <span><strong>Ops!</strong> Verifique se usuário ou senha estão corretos!  &#128549;</span>
+                { msgTipo === "sucesso" ? <span><strong>Wow!</strong> você está conectado! &#128526;</span> : <span><strong>Ops!</strong> Verifique se usuário ou senha estão corretos!  &#128549;</span>}
+                
             </div>
 
             <div className="opcoes-login text-center  my-2">
