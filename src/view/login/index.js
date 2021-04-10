@@ -3,26 +3,23 @@ import './login.css';
 import mainLogo from '../../assets/logo.svg';
 import firebase from '../../config/firebase';
 import 'firebase/auth';
+import { toast } from "react-toastify";
 
 
 function Login() {
 
     const [email, setEmail] = useState();
     const [senha, setSenha] = useState();
-    const [msgTipo,setMsgTipo] = useState();
 
     function logar() {
 
         firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
-            setMsgTipo("sucesso");
+            toast("Usuário logado com sucesso");
             setEmail("");
             setSenha("");
         }).catch(error => {
-            alert(error);
+            toast.error(error["message"]);
         });
-
-
-
     }
 
     function handleEmailChange(e) {
@@ -34,7 +31,7 @@ function Login() {
 
 
     return (
-
+        
         <div className="login-content dflex align-items-center">
             <form className="form-signin mx-auto">
                 <img class="mb-4" src={mainLogo} alt="" width="72" height="57" />
@@ -54,15 +51,13 @@ function Login() {
 
             </form >
 
-            <div className="msg-login text-white text-center my-2">
-                { msgTipo === "sucesso" ? <span><strong>Wow!</strong> você está conectado! &#128526;</span> : <span><strong>Ops!</strong> Verifique se usuário ou senha estão corretos!  &#128549;</span>}
-                
+            <div className="msg-login text-white text-center my-2">                
             </div>
 
             <div className="opcoes-login text-center  my-2">
-                <a href="#" className="mx-2"> Recuperar senha </a>
+                <a href="/#" className="mx-2"> Recuperar senha </a>
                 <span className="text-white"> &#9733;</span>
-                <a href="#" className="mx-2"> Quero senha </a>
+                <a href="/#" className="mx-2"> Quero senha </a>
             </div>
 
         </div >
